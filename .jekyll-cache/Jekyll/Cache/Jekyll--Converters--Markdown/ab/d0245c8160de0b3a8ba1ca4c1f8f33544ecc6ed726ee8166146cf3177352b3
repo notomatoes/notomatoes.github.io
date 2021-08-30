@@ -1,0 +1,27 @@
+I"<h1 id="git笔记">git笔记</h1>
+<h2 id="git常见错误解决">git常见错误解决</h2>
+<ol>
+  <li>连接错误
+    <pre><code class="language-cmd"> Git Error: OpenSSL SSL_read: Connection was reset, errno 10054
+ Failed to connect to github.com port 443
+</code></pre>
+    <ul>
+      <li>
+        <p><a href="https://stackoverflow.com/questions/46232906/git-clone-error-rpc-failed-curl-56-openssl-ssl-read-ssl-error-syscall-errno">解决方案1</a></p>
+
+        <p><code class="language-plaintext highlighter-rouge">git config http.postBuffer 5000000000</code></p>
+      </li>
+      <li>
+        <p><a href="https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed#answer-22317479">解决方案2</a>  <br />
+  <code class="language-plaintext highlighter-rouge">git config --global core.compression 0</code></p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="git使用">git使用</h2>
+<ol>
+  <li>git 同时add和commit<br />
+<code class="language-plaintext highlighter-rouge">git commit -am 'describtion'</code></li>
+</ol>
+:ET

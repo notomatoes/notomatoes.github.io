@@ -1,0 +1,57 @@
+I"F<h2 id="遇到的坑">遇到的坑</h2>
+<ol>
+  <li>函数参数注解 <code class="language-plaintext highlighter-rouge">n: List</code> 报错<br />
+<strong>解决方案</strong>: <code class="language-plaintext highlighter-rouge">from typing import List</code></li>
+</ol>
+
+<h2 id="basic">Basic</h2>
+<ul>
+  <li>
+    <h3 id="set-去重之后的list"><big><code class="language-plaintext highlighter-rouge">set()</code></big> 去重之后的list</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># 重复的被删除
+</span>  <span class="n">x</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s">'runoob'</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s">'google'</span><span class="p">)</span>
+  <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+</code></pre></div>    </div>
+    <p><code class="language-plaintext highlighter-rouge">(set(['b', 'r', 'u', 'o', 'n']), set(['e', 'o', 'g', 'l']))</code></p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># 交集
+</span>  <span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span> 
+</code></pre></div>    </div>
+    <p><code class="language-plaintext highlighter-rouge">set(['o'])</code></p>
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># 并集
+</span>  <span class="n">x</span> <span class="o">|</span> <span class="n">y</span> 
+</code></pre></div>    </div>
+    <p><code class="language-plaintext highlighter-rouge">set(['b', 'e', 'g', 'l', 'o', 'n', 'r', 'u'])</code></p>
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># 差集
+</span>  <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>
+</code></pre></div>    </div>
+    <p><code class="language-plaintext highlighter-rouge">set(['r', 'b', 'u', 'n'])</code></p>
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># 补集
+</span>  <span class="n">x</span> <span class="o">^</span> <span class="n">y</span>
+</code></pre></div>    </div>
+    <p><code class="language-plaintext highlighter-rouge">set({'b', 'e', 'g', 'l', 'n', 'r', 'u'})</code><br />
+  <strong>交集</strong> <code class="language-plaintext highlighter-rouge">&amp;</code> : <code class="language-plaintext highlighter-rouge">x&amp;y</code>，返回一个新的集合,包括同时在集合 <code class="language-plaintext highlighter-rouge">x</code> 和 <code class="language-plaintext highlighter-rouge">y</code> 中的<em>共同</em>元素<br />
+  <strong>并集</strong> <code class="language-plaintext highlighter-rouge">|</code> : <code class="language-plaintext highlighter-rouge">x|y</code>，返回一个新的集合,包括集合 <code class="language-plaintext highlighter-rouge">x</code> 和 <code class="language-plaintext highlighter-rouge">y</code> 中<em>所有</em>元素 <br />
+  <strong>差集</strong> <code class="language-plaintext highlighter-rouge">-</code> : <code class="language-plaintext highlighter-rouge">x-y</code>，返回一个新的集合,包括在集合 <code class="language-plaintext highlighter-rouge">x</code> 中但不在集合 <code class="language-plaintext highlighter-rouge">y</code> 中的元素 <br />
+  <strong>补集</strong> <code class="language-plaintext highlighter-rouge">^</code> : <code class="language-plaintext highlighter-rouge">x^y</code>，返回一个新的集合,包括集合 <code class="language-plaintext highlighter-rouge">x</code> 和 <code class="language-plaintext highlighter-rouge">y</code> 的<strong>非共同</strong>元素</p>
+  </li>
+  <li>
+    <h3 id="缓存装饰器-ref"><a href="https://www.cnblogs.com/allen2333/p/10363388.html">缓存装饰器</a> <a href="https://blog.csdn.net/ronon77/article/details/84897551">Ref</a></h3>
+    <p>简单使用</p>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">functools</span>
+ <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+ <span class="o">@</span><span class="n">functools</span><span class="p">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+ <span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+     <span class="s">"""
+     :type N: int
+     :rtype: int
+     """</span>
+     <span class="k">if</span> <span class="n">N</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+         <span class="k">return</span> <span class="n">N</span>
+     <span class="k">else</span><span class="p">:</span>
+         <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">fib</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">fib</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+:ET
