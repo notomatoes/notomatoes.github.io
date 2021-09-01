@@ -1,0 +1,227 @@
+I"�<h2 id="遇到的坑">遇到的坑</h2>
+<ol>
+  <li>函数参数注解 <code class="language-plaintext highlighter-rouge">n: List</code> 报错<br />
+<strong>解决方案</strong>: <code class="language-plaintext highlighter-rouge">from typing import List</code></li>
+</ol>
+
+<h2 id="basic">Basic</h2>
+<h3 id="set去重之后的list"><code class="language-plaintext highlighter-rouge">set()</code>去重之后的list</h3>
+<ul>
+  <li>使用
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span><span class="p">(</span><span class="s">'abccc'</span><span class="p">)</span>
+<span class="o">--&gt;</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span>
+</code></pre></div>    </div>
+  </li>
+  <li>相关知识<br />
+<strong>交集</strong> <code class="language-plaintext highlighter-rouge">&amp;</code> : <code class="language-plaintext highlighter-rouge">x&amp;y</code>,返回一个新的集合,包括同时在集合 <code class="language-plaintext highlighter-rouge">x</code> 和 <code class="language-plaintext highlighter-rouge">y</code> 中的<em>共同</em>元素<br />
+<strong>并集</strong> <code class="language-plaintext highlighter-rouge">|</code> : <code class="language-plaintext highlighter-rouge">x|y</code>,返回一个新的集合,包括集合 <code class="language-plaintext highlighter-rouge">x</code> 和 <code class="language-plaintext highlighter-rouge">y</code> 中<em>所有</em>元素 <br />
+<strong>差集</strong> <code class="language-plaintext highlighter-rouge">-</code> : <code class="language-plaintext highlighter-rouge">x-y</code>,返回一个新的集合,包括在集合 <code class="language-plaintext highlighter-rouge">x</code> 中但不在集合 <code class="language-plaintext highlighter-rouge">y</code> 中的元素 <br />
+<strong>补集</strong> <code class="language-plaintext highlighter-rouge">^</code> : <code class="language-plaintext highlighter-rouge">x^y</code>,返回一个新的集合,包括集合 <code class="language-plaintext highlighter-rouge">x</code> 和 <code class="language-plaintext highlighter-rouge">y</code> 的<strong>非共同</strong>元素</li>
+</ul>
+
+<h3 id="缓存装饰器-ref"><a href="https://www.cnblogs.com/allen2333/p/10363388.html">缓存装饰器</a> <a href="https://blog.csdn.net/ronon77/article/details/84897551">Ref</a></h3>
+<ul>
+  <li>简单使用
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">functools</span>
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="o">@</span><span class="n">functools</span><span class="p">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+  <span class="s">"""
+  :type N: int
+  :rtype: int
+  """</span>
+  <span class="k">if</span> <span class="n">N</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">N</span>
+  <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">fib</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">fib</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="defaultdict字典"><a href="https://www.jianshu.com/p/26df28b3bfc8"><big><code class="language-plaintext highlighter-rouge">defaultdict()</code></big></a>字典</h3>
+<ul>
+  <li>默认的<code class="language-plaintext highlighter-rouge">dict()</code>会因为没有初始值引发KeyError<br />
+defaultdict类的初始化函数接受一个类型作为参数,当所访问的键不存在的时候,可以实例化一个值作为默认值<br />
+初始化的几种方法:
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1">#默认是0
+</span><span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#利用lambda表达式初始化
+</span></code></pre></div>    </div>
+    <p><code class="language-plaintext highlighter-rouge">setdeafult()</code> 方法设置默认值</p>
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s">'hello'</span><span class="p">,</span> <span class="s">'world'</span><span class="p">,</span> <span class="s">'nice'</span><span class="p">,</span> <span class="s">'world'</span><span class="p">]</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+  <span class="n">counter</span><span class="p">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">kw</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">counter</span><span class="p">[</span><span class="n">kw</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="c1">## 不存在则返回默认值,存在则返回值,因此可以下面这样写
+</span>  <span class="n">counter</span><span class="p">[</span><span class="n">kw</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter</span><span class="p">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">kw</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="bisect-有序序列查找或插入元素"><big><code class="language-plaintext highlighter-rouge">bisect</code></big> 有序序列查找或插入元素</h3>
+<ul>
+  <li>查找
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">bisect</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="c1"># 相等元素后 bisect_right == bisect
+</span><span class="k">print</span><span class="p">(</span><span class="n">bisect</span><span class="p">.</span><span class="n">bisect_right</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="o">--&gt;</span> <span class="mi">4</span>
+<span class="c1"># 相等元素前
+</span><span class="k">print</span><span class="p">(</span><span class="n">bisect</span><span class="p">.</span><span class="n">bisect_left</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="o">--&gt;</span> <span class="mi">3</span>
+</code></pre></div>    </div>
+  </li>
+  <li>插入
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">bisect</span> 
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">bisect</span><span class="p">.</span><span class="n">insort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="o">--&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="lstrip-删除字符串的前导指定字符"><big><code class="language-plaintext highlighter-rouge">lstrip</code></big> 删除字符串的前导指定字符</h3>
+<ul>
+  <li>用法
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">'000101'</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s">'0'</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s">'aaa101'</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span> 
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="o">--&gt;</span> <span class="mi">101</span> <span class="mi">101</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="itertools模块功能详解-link"><code class="language-plaintext highlighter-rouge">itertools</code>模块功能详解 <a href="https://docs.python.org/3/library/itertools.html#:~:text=Functions%20creating%20iterators%20for%20efficient%20looping%C2%B6">link</a></h3>
+<ul>
+  <li>使用
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="n">help</span><span class="p">(</span><span class="n">itertools</span><span class="p">)</span> <span class="c1"># 查看帮助
+</span></code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">accumulate(p[, func]) --&gt; p0, p0+p1, p0+p1+p2</code> 逐项累加
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">accumulate</span><span class="p">(</span><span class="n">nums</span><span class="p">)))</span>
+<span class="o">--&gt;</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">chain(*iterables)</code> 与其名称意义一样,给它一个列表如 lists/tuples/iterables,链接在一起；返回iterables对象
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">letter</span> <span class="o">=</span> <span class="s">'asdasd'</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="n">chain</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">idx</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="n">chain</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">idx</span><span class="p">)))</span>
+<span class="o">--&gt;</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s">'s'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">}</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'s'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'s'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">count(start=0, step=2)</code> 生成无界限序列,count(start=0, step=1),示例从100开始,步长为2,循环10,打印对应值；必须手动break,count()会一直循环
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">itertools</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span>
+<span class="o">--&gt;</span> <span class="mi">100</span> <span class="mi">102</span> <span class="p">......</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">filterfalse(contintion, data)</code>迭代过滤条件为false的数据,如果条件为空,返回data中为false的项
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">booleans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="n">filterfalse</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">booleans</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="n">filterfalse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">booleans</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="n">filterfalse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nums</span><span class="p">)))</span>
+<span class="o">--&gt;</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">compress(data, selectors)</code> <code class="language-plaintext highlighter-rouge">--&gt;</code>  <code class="language-plaintext highlighter-rouge">(d[0] if s[0]), (d[1] if s[1]), ...</code>
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">booleans</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="n">compress</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">booleans</span><span class="p">)))</span>
+<span class="o">--&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">dropwhile(pred, seq) --&gt; seq[n], seq[n+1], starting when pred fails</code> 和上面类似,根据第一个参数drop第二个参数
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="n">dropwhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">,</span> <span class="n">nums</span><span class="p">)))</span>
+<span class="o">--&gt;</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">takewhile(pred, seq) --&gt; seq[0], seq[1], until pred fails</code>
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">,</span> <span class="n">nums</span><span class="p">)))</span>
+<span class="o">--&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">starmap(fun, seq) --&gt; fun(*seq[0]), fun(*seq[1]), ...</code> 对每一个seq调用fun
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="n">starmap</span><span class="p">(</span><span class="nb">max</span><span class="p">,</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">123</span><span class="p">,</span><span class="mi">1</span><span class="p">)])))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="n">starmap</span><span class="p">(</span><span class="nb">pow</span><span class="p">,</span> <span class="p">[(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">12</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)])))</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">-</span><span class="n">c</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="p">.</span><span class="n">starmap</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)])))</span>
+<span class="o">--&gt;</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">123</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">repeat(elem [,n]) --&gt; elem, elem, elem, ... endlessly or up to n times</code> 重复n次
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">repeat</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">23</span><span class="p">,],</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="o">--&gt;</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">23</span><span class="p">]]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">islice(seq, [start,] stop [, step]) --&gt; elements from seq[start:stop:step]</code>返回序列seq的从start开始到stop结束的步长为step的元素的迭代器
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="o">--&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li>` product(p, q, … [repeat=1]) –&gt; cartesian product` 创建一个迭代器，生成表示item1，item2等中的项目的笛卡尔积的元组，repeat是一个关键字参数，指定重复生成序列的次数
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="s">'123'</span><span class="p">,</span><span class="s">'ab'</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">3</span><span class="p">)))</span>
+<span class="o">--&gt;</span> <span class="p">[(</span><span class="s">'1'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">),</span> <span class="p">(</span><span class="s">'1'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">),</span> <span class="p">(</span><span class="s">'2'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">),</span> <span class="p">(</span><span class="s">'2'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">),</span> <span class="p">(</span><span class="s">'3'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">),</span> <span class="p">(</span><span class="s">'3'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">permutations(p[, r])</code> 从p任取r个的所有情况(有序)
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="mi">2</span><span class="p">)))</span>
+<span class="o">--&gt;</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">combinations(p, r)</code> 从p任取r个(无序)(取出不放回)
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="mi">2</span><span class="p">)))</span>
+<span class="o">--&gt;</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">combinations_with_replacement(p, r)</code> 从p任取r个(无序)(取出放回)
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">combinations_with_replacement</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="mi">2</span><span class="p">)))</span>
+<span class="o">--&gt;</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">zip_longest(p, q, ...) --&gt; (p[0], q[0]), (p[1], q[1]), ... </code> 与zip相比,会按最长的算,<code class="language-plaintext highlighter-rouge">fillvalue</code>是填充短的值,不写默认为<code class="language-plaintext highlighter-rouge">None</code>
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span><span class="s">'b'</span><span class="p">,</span><span class="s">'c'</span><span class="p">,</span><span class="s">'d'</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">zip_longest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">fillvalue</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)))</span>
+<span class="o">--&gt;</span> <span class="p">[(</span><span class="mi">12</span><span class="p">,</span> <span class="s">'a'</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">'b'</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">'c'</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">'d'</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">12</span><span class="p">,</span> <span class="s">'a'</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">'b'</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">'c'</span><span class="p">)]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">groupby(iterable[, keyfunc]) --&gt; sub-iterators grouped by value of keyfunc(v)</code> <a href="https://docs.python.org/3/library/itertools.html#itertools.groupby">link</a>
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groupby</span><span class="p">(</span><span class="s">'AAABBB11Gf'</span><span class="p">):</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="nb">list</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+<span class="o">--&gt;</span> <span class="n">A</span> <span class="p">[</span><span class="s">'A'</span><span class="p">,</span> <span class="s">'A'</span><span class="p">,</span> <span class="s">'A'</span><span class="p">]</span>
+<span class="n">B</span> <span class="p">[</span><span class="s">'B'</span><span class="p">,</span> <span class="s">'B'</span><span class="p">,</span> <span class="s">'B'</span><span class="p">]</span>
+<span class="mi">1</span> <span class="p">[</span><span class="s">'1'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">]</span>
+<span class="n">G</span> <span class="p">[</span><span class="s">'G'</span><span class="p">]</span>
+<span class="n">f</span> <span class="p">[</span><span class="s">'f'</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">tee(it, n=2) --&gt; (it1, it2 , ... itn) splits one iterator into n</code>
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 不想写了
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+:ET
