@@ -1,18 +1,40 @@
-I"$<h2 id="遇到的坑">遇到的坑</h2>
+I"24<h2 id="遇到的坑">遇到的坑</h2>
 <ol>
   <li>函数参数注解 <code class="language-plaintext highlighter-rouge">n: List</code> 报错<br />
 <strong>解决方案</strong>: <code class="language-plaintext highlighter-rouge">from typing import List</code></li>
 </ol>
 
 <h2 id="basic">Basic</h2>
-<ul>
-  <li><big><code class="language-plaintext highlighter-rouge">set()</code></big> 去重之后的list</li>
-</ul>
+<h3 id="set-去重之后的list"><big><code class="language-plaintext highlighter-rouge">set()</code></big> 去重之后的list</h3>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 重复的被删除
+</span><span class="n">x</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s">'runoob'</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s">'google'</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+<span class="o">&gt;&gt;</span> <span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="s">'b'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">,</span> <span class="s">'o'</span><span class="p">,</span> <span class="s">'n'</span><span class="p">]),</span> <span class="nb">set</span><span class="p">([</span><span class="s">'e'</span><span class="p">,</span> <span class="s">'o'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">]))</span> 
+
+<span class="c1"># 交集
+</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span> 
+<span class="o">&gt;&gt;</span> <span class="nb">set</span><span class="p">([</span><span class="s">'o'</span><span class="p">])</span>
+
+<span class="c1"># 并集
+</span><span class="n">x</span> <span class="o">|</span> <span class="n">y</span>        
+<span class="o">&gt;&gt;</span> <span class="nb">set</span><span class="p">([</span><span class="s">'b'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">,</span> <span class="s">'o'</span><span class="p">,</span> <span class="s">'n'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">])</span>
+
+<span class="c1"># 差集
+</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span>
+<span class="o">&gt;&gt;</span> <span class="nb">set</span><span class="p">([</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">,</span> <span class="s">'n'</span><span class="p">])</span>
+
+<span class="c1"># 补集
+</span><span class="n">x</span> <span class="o">^</span> <span class="n">y</span>
+<span class="o">&gt;&gt;</span> <span class="nb">set</span><span class="p">({</span><span class="s">'b'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">,</span> <span class="s">'n'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">})</span> 
+</code></pre></div></div>
 
 <p><strong>交集</strong> <code class="language-plaintext highlighter-rouge">&amp;</code> : <code class="language-plaintext highlighter-rouge">x&amp;y</code>，返回一个新的集合,包括同时在集合 <code class="language-plaintext highlighter-rouge">x</code> 和 <code class="language-plaintext highlighter-rouge">y</code> 中的<em>共同</em>元素<br />
 <strong>并集</strong> <code class="language-plaintext highlighter-rouge">|</code> : <code class="language-plaintext highlighter-rouge">x|y</code>，返回一个新的集合,包括集合 <code class="language-plaintext highlighter-rouge">x</code> 和 <code class="language-plaintext highlighter-rouge">y</code> 中<em>所有</em>元素 <br />
 <strong>差集</strong> <code class="language-plaintext highlighter-rouge">-</code> : <code class="language-plaintext highlighter-rouge">x-y</code>，返回一个新的集合,包括在集合 <code class="language-plaintext highlighter-rouge">x</code> 中但不在集合 <code class="language-plaintext highlighter-rouge">y</code> 中的元素 <br />
 <strong>补集</strong> <code class="language-plaintext highlighter-rouge">^</code> : <code class="language-plaintext highlighter-rouge">x^y</code>，返回一个新的集合,包括集合 <code class="language-plaintext highlighter-rouge">x</code> 和 <code class="language-plaintext highlighter-rouge">y</code> 的<strong>非共同</strong>元素</p>
+
 <h3 id="缓存装饰器-ref"><a href="https://www.cnblogs.com/allen2333/p/10363388.html">缓存装饰器</a> <a href="https://blog.csdn.net/ronon77/article/details/84897551">Ref</a></h3>
 <p>简单使用</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">functools</span>
@@ -67,6 +89,14 @@ defaultdict类的初始化函数接受一个类型作为参数,当所访问的�
 <span class="n">bisect</span><span class="p">.</span><span class="n">insort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+</code></pre></div>    </div>
+    <h3 id="lstrip-删除字符串的前导指定字符"><big><code class="language-plaintext highlighter-rouge">lstrip</code></big> 删除字符串的前导指定字符</h3>
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">'000101'</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s">'0'</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s">'aaa101'</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span> 
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="mi">101</span> <span class="mi">101</span>
 </code></pre></div>    </div>
   </li>
 </ul>
