@@ -1,0 +1,24 @@
+I"�<h1 id="字典树">字典树</h1>
+<h2 id="代码模板">代码模板</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Trie</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">children</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">Trie</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">word</span> <span class="o">=</span> <span class="s">""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">is_word</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
+        <span class="n">cur</span><span class="p">.</span><span class="n">is_word</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">cur</span><span class="p">.</span><span class="n">word</span> <span class="o">=</span> <span class="n">word</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">cur</span><span class="p">.</span><span class="n">is_word</span>
+</code></pre></div></div>
+<h2 id="相关题目">相关题目</h2>
+<p><a href="https://leetcode-cn.com/problems/word-search-ii/">LC单词搜索</a></p>
+:ET
