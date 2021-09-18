@@ -1,4 +1,4 @@
-I"�<h2 id="官方文档"><a href="https://docs.python.org/zh-cn/3/library/index.html">官方文档</a></h2>
+I"ø<h2 id="官方文档"><a href="https://docs.python.org/zh-cn/3/library/index.html">官方文档</a></h2>
 <h2 id="遇到的坑">遇到的坑</h2>
 <ol>
   <li>函数参数注解 <code class="language-plaintext highlighter-rouge">n: List</code> 报错<br />
@@ -273,30 +273,7 @@ class3 [('class3', 'kabutack', 100)]
     <h3 id="字符串相关">字符串相关</h3>
   </li>
   <li><code class="language-plaintext highlighter-rouge">ord()</code> 返回对应字符的ASCII码</li>
-  <li><code class="language-plaintext highlighter-rouge">chr()</code> 返回ASCII对应的字符
-    <h2 id="数据结构">数据结构</h2>
-  </li>
-  <li>字典树
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Trie</span><span class="p">:</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-      <span class="bp">self</span><span class="p">.</span><span class="n">children</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">Trie</span><span class="p">)</span>
-      <span class="bp">self</span><span class="p">.</span><span class="n">word</span> <span class="o">=</span> <span class="s">""</span>
-      <span class="bp">self</span><span class="p">.</span><span class="n">is_word</span> <span class="o">=</span> <span class="bp">False</span>
-  <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
-      <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span>
-      <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
-          <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
-      <span class="n">cur</span><span class="p">.</span><span class="n">is_word</span> <span class="o">=</span> <span class="bp">True</span>
-      <span class="n">cur</span><span class="p">.</span><span class="n">word</span> <span class="o">=</span> <span class="n">word</span>
-  <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
-      <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span>
-      <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
-          <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">.</span><span class="n">children</span><span class="p">:</span>
-              <span class="k">return</span> <span class="bp">False</span>
-          <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="n">children</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
-      <span class="k">return</span> <span class="n">cur</span><span class="p">.</span><span class="n">is_word</span>
-</code></pre></div>    </div>
-  </li>
+  <li><code class="language-plaintext highlighter-rouge">chr()</code> 返回ASCII对应的字符</li>
 </ul>
 
 <h1 id="todo">todo</h1>
